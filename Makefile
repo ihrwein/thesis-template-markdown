@@ -9,7 +9,6 @@ RESEARCH_GROUP =
 THESIS_TYPE = Szakmai gyakorlat beszámoló
 DOCUMENT_LANG = english
 SOURCE_FILES = chapter1.md chapter2.md chapter3.md chapter4.md summary.md
-APPENDIX_FILE = appendix.md
 
 # variables for the PDF/HTML compiler
 ARGS = \
@@ -31,7 +30,6 @@ ARGS = \
 
 LATEX_ARGS = \
 	$(ARGS) \
-	--include-after-body=$(APPENDIX_FILE).tex \
 	--template=template.latex \
 	--variable=documentclass:report \
 	--variable=fontsize:11pt \
@@ -53,27 +51,25 @@ HTML_ARGS = \
 pdf: latex build-latex
 
 
-latex: compile-appendix-tex
+latex:
 	pandoc \
 		$(LATEX_ARGS) \
 		--to=latex \
 		--output=$(FILENAME).tex \
 
-html: compile-appendix-html
+html:
 	pandoc \
 		$(FILES) \
 		$(ARGS) \
 		$(HTML_ARGS) \
-		--include-after-body=$(APPENDIX_FILE).html \
 		--to=html \
 		--output=$(FILENAME).html \
 		--css=buttondown.css \
 
-epub: compile-appendix-html
+epub:
 	pandoc \
 		$(FILES) \
 		$(ARGS) \
-		--include-after-body=$(APPENDIX_FILE).html \
 		--output=$(FILENAME).epub \
 		--css=buttondown.css \
 		--epub-metadata=metadata.xml \
@@ -83,25 +79,6 @@ build-latex:
 #	bibtex $(FILENAME).aux
 	pdflatex $(FILENAME).tex
 #	pdflatex $(FILENAME).tex
-
-
-## rules for compiling the appendix
-
-compile-appendix-tex:
-	pandoc \
-		$(APPENDIX_FILE) \
-		--from=markdown \
-		--to=latex \
-		--variable=documentclass:report \
-		--output=$(APPENDIX_FILE).tex \
-
-compile-appendix-html:
-	pandoc \
-		$(APPENDIX_FILE) \
-		$(HTML_ARGS) \
-		--from=markdown \
-		--to=html \
-		--output=$(APPENDIX_FILE).html \
 
 ## misc rules
 
