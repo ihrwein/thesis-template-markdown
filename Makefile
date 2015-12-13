@@ -8,7 +8,7 @@ DEPARTMENT = Távközlési és Médiainformatikai Tanszék
 RESEARCH_GROUP = 
 THESIS_TYPE = Diplomaterv
 DOCUMENT_LANG = english
-SOURCE_FILES = abstract.md chapter1.md chapter2.md chapter3.md chapter4.md summary.md
+SOURCE_FILES = chapter1.md chapter2.md chapter3.md chapter4.md summary.md
 APPENDIX_FILE = appendix.md
 
 # variables for the PDF/HTML compiler
@@ -81,7 +81,7 @@ epub: compile-appendix-html
 build-latex:
 	pdflatex $(FILENAME).tex
 #	bibtex $(FILENAME).aux
-#	pdflatex $(FILENAME).tex
+	pdflatex $(FILENAME).tex
 #	pdflatex $(FILENAME).tex
 
 
