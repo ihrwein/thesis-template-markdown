@@ -8,7 +8,6 @@ DEPARTMENT = Távközlési és Médiainformatikai Tanszék
 RESEARCH_GROUP = 
 THESIS_TYPE = Diplomaterv
 DOCUMENT_LANG = english
-BEFORE_FILE = guideline.md
 SOURCE_FILES = abstract.md chapter1.md chapter2.md chapter3.md chapter4.md summary.md
 APPENDIX_FILE = appendix.md
 
@@ -32,7 +31,6 @@ ARGS = \
 
 LATEX_ARGS = \
 	$(ARGS) \
-	--include-before-body=$(BEFORE_FILE).tex \
 	--include-after-body=$(APPENDIX_FILE).tex \
 	--template=template.latex \
 	--variable=documentclass:report \
@@ -55,28 +53,26 @@ HTML_ARGS = \
 pdf: latex build-latex
 
 
-latex: compile-guideline-tex compile-appendix-tex
+latex: compile-appendix-tex
 	pandoc \
 		$(LATEX_ARGS) \
 		--to=latex \
 		--output=$(FILENAME).tex \
 
-html: compile-guideline-html compile-appendix-html
+html: compile-appendix-html
 	pandoc \
 		$(FILES) \
 		$(ARGS) \
 		$(HTML_ARGS) \
-		--include-before-body=$(BEFORE_FILE).html \
 		--include-after-body=$(APPENDIX_FILE).html \
 		--to=html \
 		--output=$(FILENAME).html \
 		--css=buttondown.css \
 
-epub: compile-guideline-html compile-appendix-html
+epub: compile-appendix-html
 	pandoc \
 		$(FILES) \
 		$(ARGS) \
-		--include-before-body=$(BEFORE_FILE).html \
 		--include-after-body=$(APPENDIX_FILE).html \
 		--output=$(FILENAME).epub \
 		--css=buttondown.css \
@@ -88,22 +84,6 @@ build-latex:
 #	pdflatex $(FILENAME).tex
 #	pdflatex $(FILENAME).tex
 
-## rules for compiling the guideline
-
-compile-guideline-tex:
-	pandoc \
-		$(BEFORE_FILE) \
-		--from=markdown \
-		--to=latex \
-		--variable=documentclass:report \
-		--output=$(BEFORE_FILE).tex \
-
-compile-guideline-html:
-	pandoc \
-		$(BEFORE_FILE) \
-		--from=markdown \
-		--to=html \
-		--output=$(BEFORE_FILE).html \
 
 ## rules for compiling the appendix
 
