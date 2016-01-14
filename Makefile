@@ -1,8 +1,8 @@
 # constants for defining the author, title, etc.
 FILENAME = thesis
 TITLE = Rust language bindings in syslog-ng
-AUTHOR = Tibor Benke
-ADVISOR = László Budai
+AUTHOR = Benke Tibor
+ADVISOR = Budai László
 UNIVERSITY = Budapesti Műszaki és Gazdaságtudományi Egyetem
 DEPARTMENT = Távközlési és Médiainformatikai Tanszék
 RESEARCH_GROUP = 
